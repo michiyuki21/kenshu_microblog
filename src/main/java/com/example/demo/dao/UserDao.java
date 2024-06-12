@@ -47,8 +47,8 @@ public class UserDao implements BaseDao<User> {
 		return user;
 	}
 	
-	public User findByNickname(String nickname) throws DataNotFoundException {
-		User user = this.repository.findByNickname(nickname);
+	public List<User> findByNickname(String nickname) throws DataNotFoundException {
+		List<User> user = this.repository.findByNickname(nickname);
 		if (user == null) {
 			throw new DataNotFoundException();
 		}

@@ -44,7 +44,7 @@ public class UserService implements BaseService<User> {
 		return dao.findByEmail(email);
 	}
 	
-	public User findByNickname(String nickname) throws DataNotFoundException {
+	public List<User> findByNickname(String nickname) throws DataNotFoundException {
 		return dao.findByNickname(nickname);
 	}
 

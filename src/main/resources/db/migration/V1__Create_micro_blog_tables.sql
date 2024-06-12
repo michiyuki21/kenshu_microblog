@@ -13,6 +13,7 @@ create table tweet (
     id int(11) Not null Primary key Auto_increment Comment 'ID',
     user_id int(11) Not null Comment 'ユーザID',
     body varchar(255) Not null Comment 'つぶやき',
+    modified_at datetime Not null Default current_timestamp() On update current_timestamp() Comment '最終更新時刻',
     created_at datetime Not null Default current_timestamp() Comment '登録日'
 ) Engine=InnoDB Default Charset=utf8mb4 Comment='つぶやき';
 
@@ -28,6 +29,5 @@ DROP TABLE IF EXISTS favorite;
 create table favorite (
     id int(11) Not null Primary key Auto_increment Comment 'お気に入りID',
     user_id int(11) Not null Comment 'ユーザID',
-    tweet_id int(11) Not null Comment 'ツイートID',
-    modified_at datetime Not null Default current_timestamp() On update current_timestamp() Comment '最終更新時刻'
+    tweet_id int(11) Not null Comment 'ツイートID'
 ) Engine=InnoDB Default Charset=utf8mb4 Comment='お気に入り';

@@ -16,65 +16,35 @@
         <div class="navbar-header">
           <a th:href="@{/admin/timeline}" class="h2">マイクロブログ</a>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-          <ul sec:authorize="!authenticated" class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a th:href="@{/users/login}" class="nav-link">ログイン</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a th:href="@{/users/create}" class="nav-link">ユーザ登録</a>
-            </li>
-          </ul>
-          <ul sec:authorize="authenticated" class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">受注</a>
-              <ul class="dropdown-menu">
-                <li><a th:href="@{/admin/orders}" class="nav-link">一覧</a></li>
-                <li><a th:href="@{/admin/orders/create}" class="nav-link">新規作成</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">商品</a>
-              <ul class="dropdown-menu">
-                <li><a th:href="@{/admin/products}" class="nav-link">一覧</a></li>
-                <li><a th:href="@{/admin/products/create}" class="nav-link">新規作成</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">顧客</a>
-              <ul class="dropdown-menu">
-                <li><a th:href="@{/admin/customers}" class="nav-link">一覧</a></li>
-                <li><a th:href="@{/admin/customers/create}" class="nav-link">新規作成</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul sec:authorize="authenticated" class="navbar-nav ml-auto">
-            <li class="navbar-text mr-3"><span sec:authentication="name" class="me-1"></span>さん</li>
-            <li class="nav-item dropdown">
-              <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">管理</a>
-              <ul class="dropdown-menu">
-                <li><a th:href="@{/admin/users}" class="nav-link">ユーザ一覧</a></li>
-                <li><a th:href="@{/admin/users/edit}" class="nav-link">ユーザ編集</a></li>
-                <li><a th:href="@{/admin/users/logout}" class="nav-link">ログアウト</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        
       </div>
     </nav>
 
-    <div class="container-fluid mt-4">
+    <div sec:authorize="!authenticated" class="container-fluid mt-4">
       <div class="row col-6 main mx-auto justify-content-start">
         <div class="col-sm-3">
           <a th:href="@{/users/login}" class="h6">ログイン</a>
         </div>
         <div class="col-sm-6">
           <a th:href="@{/users/create}" class="h6">新規ユーザ登録</a>
+        </div>
+      </div>
+    </div>
+    <div sec:authorize="authenticated" class="container-fluid mt-4">
+      <div class="row col-10 main mx-auto justify-content-start">
+        <div class="col-sm-2">
+          <h1 class="h6">ようこそ、<span th:text="${user.nickname}" class="me-1"></span>さん</h1>
+        </div>
+        <div class="col-sm-2">
+          <a th:href="@{/admin/users/edit}" class="h6">ユーザ情報更新</a>
+        </div>
+        <div class="col-sm-2">
+          <a th:href="@{/admin/users/list}" class="h6">ユーザ一覧</a>
+        </div>
+        <div class="col-sm-2">
+          <a th:href="@{/admin/tweets/listOfFavorite}" class="h6">お気に入り</a>
+        </div>
+        <div class="col-sm-2">
+          <a th:href="@{/admin/users/logout}" class="h6">ログアウト</a>
         </div>
       </div>
     </div>
