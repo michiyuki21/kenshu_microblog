@@ -31,11 +31,11 @@ public class Follow {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@NotNull(message = "ユーザー名は必須入力です")
-	private Integer userId;
+	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "following_user_id")
 	@NotNull(message = "ユーザー名は必須入力です")
-	private Integer followingUserId;
+	private User followingUser;
 
 }

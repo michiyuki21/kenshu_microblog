@@ -5,24 +5,7 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <form th:action="@{/admin/timeline}" th:object="${tweet}" method="post">
-                <ul th:if="${errors.hasErrors()}" class="alert alert-danger" role="alert">
-                    <li th:each="err : ${errors.getAllErrors()}">
-                        <span th:text="${err.defaultMessage}"></span>
-                    </li>
-                </ul>
-                <div class="form-group">
-                    <label for="body" class="row h6 mb-2">いま、何しているの？</label>
-                    <textarea rows="3" cols="60" th:field="*{body}" class="p-2"></textarea>
-                </div>
-                <div class="mb-3">
-                    <div class="row justify-content-start">
-                        <div class="col-3">
-                            <input class="btn btn-secondary col-10" type="submit" value="つぶやく">
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <h1 class="page-header h6 mb-4" th:text="${user.nickname} + さんのお気に入り"></h1>
             <div th:each="tweet: ${tweets}" th:object="${tweet}">
                 <div class="border-bottom">
                     <div class="row justify-content-start">

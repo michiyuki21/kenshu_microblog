@@ -39,19 +39,18 @@ public class TweetDao implements BaseDao<Tweet> {
 		}
 	}
 	
-	public List<Tweet> findByUserId(Integer userId) throws DataNotFoundException {
-		List<Tweet> tweets = this.repository.findByUserId(userId);
-		if (tweets == null) {
-			throw new DataNotFoundException();
-		}
+	public List<Tweet> findByUserId(Integer userId) {
+		List<Tweet> tweets = this.repository.findByUserIdOrderByCreatedAtDesc(userId);
 		return tweets;
 	}
 	
-	public List<Tweet> timelineTweetsFindByUserId(Integer userId) throws DataNotFoundException {
+	public List<Tweet> favoriteTweetsFindByUserId(Integer userId) {
+		List<Tweet> tweets = this.repository.favoriteTweetsFindByUserId(userId);
+		return tweets;
+	}
+	
+	public List<Tweet> timelineTweetsFindByUserId(Integer userId) {
 		List<Tweet> tweets = this.repository.timelineTweetsFindByUserId(userId);
-		if (tweets == null) {
-			throw new DataNotFoundException();
-		}
 		return tweets;
 	}
 }

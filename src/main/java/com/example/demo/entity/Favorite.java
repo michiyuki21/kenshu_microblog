@@ -31,7 +31,7 @@ public class Favorite {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@NotNull(message = "ユーザー名は必須入力です")
-	private User user;
+	private User favoUser;
 	
 	@ManyToOne
 	@JoinColumn(name = "tweet_id")

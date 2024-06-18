@@ -5,7 +5,7 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <table class="table table-striped mt-4">
+            <table class="table table-bordered mt-4">
                 <thead class="bg-secondary">
                     <tr>
                         <th>ユーザ名</th>
@@ -15,9 +15,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="user: ${users}">
-                        <td th:text="${user.nickname}"></td>
-                        <td th:text="${user.follow.size()}"></td>
+                    <tr th:each="userFromAll: ${users}" th:object="${userFromAll}">
+                        <td><a th:href="@{/admin/tweets/listOfUser/{id}(id=*{id})}" class="h6" th:text="*{nickname}"></a></td>
+                        <td th:text="*{followUser.size()}"></td>
+                        <td th:text="*{followingUser.size()}"></td>
+                        <td>
+                            <span th:unless="${#sets.contains(followinUserIdsSet, __*{id}__)}">
+                                <a th:href="@{/admin/users/follow/{id}(id=*{id})}" class="h6">フォローする</a>
+                            </span>
+                            <span th:if="${#sets.contains(followinUserIdsSet, __*{id}__)}">
+                                <div>フォロー中</div>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

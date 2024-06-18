@@ -34,11 +34,15 @@ public class TweetService implements BaseService<Tweet> {
 		dao.deleteById(id);
 	}
 	
-	public List<Tweet> findByUserId(Integer userId) throws DataNotFoundException {
+	public List<Tweet> findByUserId(Integer userId) {
 		return dao.findByUserId(userId);
 	}
 	
-	public List<Tweet> timelineTweetsFindByUserId(Integer userId) throws DataNotFoundException {
+	public List<Tweet> favoriteTweetsFindByUserId(Integer userId) {
+		return dao.favoriteTweetsFindByUserId(userId);
+	}
+	
+	public List<Tweet> timelineTweetsFindByUserId(Integer userId) {
 		return dao.timelineTweetsFindByUserId(userId);
 	}
 }

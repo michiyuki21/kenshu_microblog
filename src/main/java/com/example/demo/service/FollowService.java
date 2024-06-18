@@ -34,11 +34,11 @@ public class FollowService implements BaseService<Follow> {
 		dao.deleteById(id);
 	}
 	
-	public List<Follow> findByUserId(Integer userId) throws DataNotFoundException {
+	public List<Follow> findByUserId(Integer userId) {
 		return dao.findByUserId(userId);
 	}
 	
-	public List<Follow> findByFollowingUserId(Integer followingUserId) throws DataNotFoundException {
+	public List<Follow> findByFollowingUserId(Integer followingUserId) {
 		return dao.findByUserId(followingUserId);
 	}
 }

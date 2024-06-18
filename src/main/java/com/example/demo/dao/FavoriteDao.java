@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,19 +41,18 @@ public class FavoriteDao implements BaseDao<Favorite> {
 		}
 	}
 	
-	public List<Favorite> findByUserId(Integer userId) throws DataNotFoundException {
-		List<Favorite> favorites = this.repository.findByUserId(userId);
-		if (favorites == null) {
-			throw new DataNotFoundException();
-		}
+	public List<Favorite> findByUserId(Integer userId) {
+		List<Favorite> favorites = this.repository.findByFavoUserId(userId);
 		return favorites;
 	}
 	
-	public List<Favorite> findByTweetId(Integer tweetId) throws DataNotFoundException {
+	public List<Favorite> findByTweetId(Integer tweetId) {
 		List<Favorite> favorites = this.repository.findByTweetId(tweetId);
-		if (favorites == null) {
-			throw new DataNotFoundException();
-		}
 		return favorites;
+	}
+	
+	public Set<Integer> favoriteTweetIdsSetFindByUserId(Integer userId) {
+		Set<Integer> tweetIds = new HashSet<>(this.repository.favoriteTweetIdsSetFindByUserId(userId));
+		return tweetIds;
 	}
 }

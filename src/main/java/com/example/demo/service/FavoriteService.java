@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,15 @@ public class FavoriteService implements BaseService<Favorite> {
 		dao.deleteById(id);
 	}
 	
-	public List<Favorite> findByUserId(Integer userId) throws DataNotFoundException {
+	public List<Favorite> findByUserId(Integer userId) {
 		return dao.findByUserId(userId);
 	}
 	
-	public List<Favorite> findByTweetId(Integer tweetId) throws DataNotFoundException {
+	public List<Favorite> findByTweetId(Integer tweetId) {
 		return dao.findByTweetId(tweetId);
+	}
+	
+	public Set<Integer> favoriteTweetIdsSetFindByUserId(Integer userId) {
+		return dao.favoriteTweetIdsSetFindByUserId(userId);
 	}
 }

@@ -39,19 +39,13 @@ public class FollowDao implements BaseDao<Follow> {
 		}
 	}
 	
-	public List<Follow> findByUserId(Integer userId) throws DataNotFoundException {
+	public List<Follow> findByUserId(Integer userId) {
 		List<Follow> follows = this.repository.findByUserId(userId);
-		if (follows == null) {
-			throw new DataNotFoundException();
-		}
 		return follows;
 	}
 	
-	public List<Follow> findByFollowingUserId(Integer followingUserId) throws DataNotFoundException {
+	public List<Follow> findByFollowingUserId(Integer followingUserId) {
 		List<Follow> follows = this.repository.findByUserId(followingUserId);
-		if (follows == null) {
-			throw new DataNotFoundException();
-		}
 		return follows;
 	}
 }

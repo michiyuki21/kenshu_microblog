@@ -19,7 +19,6 @@ import com.example.demo.common.FlashData;
 import com.example.demo.entity.Tweet;
 import com.example.demo.entity.User;
 import com.example.demo.service.FavoriteService;
-import com.example.demo.service.FollowService;
 import com.example.demo.service.TweetService;
 import com.example.demo.service.UserService;
 
@@ -34,9 +33,7 @@ public class Admin {
 	@Autowired
 	UserService userService;
 	@Autowired
-	FollowService followService;
-	@Autowired
-	FavoriteService favoritService;
+	FavoriteService favoriteService;
 	@Autowired
 	public Validator validator;
 	
@@ -64,14 +61,16 @@ public class Admin {
 			ra.addFlashAttribute("flash", flash);
 			return "redirect:/users/login";
 		}
-		try {
-			tweets = tweetService.timelineTweetsFindByUserId(userId);
-		} catch (DataNotFoundException e) {
-			tweets = null;
-		}
+		// タイムライン表示用のクエリを自作
+		tweets = tweetService.timelineTweetsFindByUserId(userId);
+		
+		Set<Integer> favoriteTweetIdsSet;
+		favoriteTweetIdsSet = favoriteService.favoriteTweetIdsSetFindByUserId(userId);
+		
 		model.addAttribute("user", user);
 		model.addAttribute("tweet", tweet);
 		model.addAttribute("tweets", tweets);
+		model.addAttribute("favoriteTweetIdsSet", favoriteTweetIdsSet);
 		Errors errors = new BeanPropertyBindingResult(tweet, "tweet");
 		model.addAttribute("errors", errors);
 		return "admin/timeline";
@@ -101,11 +100,7 @@ public class Admin {
 				model.addAttribute("user", user);
 				model.addAttribute("errors", errors);
 				List<Tweet> tweets;
-				try {
-					tweets = tweetService.timelineTweetsFindByUserId(user.getId());
-				} catch (DataNotFoundException e) {
-					tweets = null;
-				}
+				tweets = tweetService.timelineTweetsFindByUserId(user.getId());
 				model.addAttribute("tweets", tweets);
 				return "admin/timeline";
 			}
